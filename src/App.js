@@ -1,25 +1,46 @@
 import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
+import { Header } from './components/header';
+import { Footer } from './components/footer';
+import { Content } from './components/content';
+import 'bootstrap/dist/css/bootstrap.min.css'; // from Bootstrap Website
+import { Navbar, Nav } from 'react-bootstrap'; // allows us to use the Navbar
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';  // BrowserRouter as Router , whenever we want to use BrowserRouter we can write Router 
+
+// Changed from Function to Class, and added extends Component to turn it into a component
+class App extends Component {
+
+  // added the render method and wrapped it around the whole return method
+  render() {
+
+    return (
+      <Router>
+        <div className="App">
+
+          <Navbar bg="primary" variant="dark">
+            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/read">Read</Nav.Link>
+              <Nav.Link href="/create">Create</Nav.Link>
+            </Nav>
+          </Navbar>
+
+          <br></br>
+          <Switch>
+            <Route path='/' component={Content} exact />
+            <Route path='/create' component={Header} exact />
+            <Route path='/read' component={Footer} exact />
+          </Switch>
+        </div>
+      </Router>
+    );
+
+  } // render()
+
+} // class App
+
 
 export default App;
